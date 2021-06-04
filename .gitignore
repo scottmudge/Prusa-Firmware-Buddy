@@ -13,3 +13,5 @@ compile_commands.json
 /.vscode/*.registers.state.json
 Makefile
 /doc/html/
+out/
+CMakeSettings.json
