@@ -9,7 +9,7 @@ static const constexpr uint16_t WDT_IWDG_RELOAD = 4095;        // 4s max period
 
 // prescaler value for HCD refresh events
 // note - apparent tick rate for HC SOF events is ~2 kHz (1 << 11)
-static const constexpr uint16_t WDT_IWDG_HCD_PRESCALER = (1 << 4);
+static const constexpr uint16_t WDT_IWDG_HCD_PRESCALER = (1 << 7);
 // 1 full second without the interrupt being released
 static const constexpr uint16_t WDT_IWDG_HCD_INT_LIMIT = (((1 << 11) / WDT_IWDG_HCD_PRESCALER) * 1);
 
