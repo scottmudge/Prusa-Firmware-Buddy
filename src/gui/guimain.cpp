@@ -20,6 +20,7 @@
 #include "screen_hardfault.hpp"
 #include "screen_temperror.hpp"
 #include "screen_watchdog.hpp"
+#include "screen_usbfault.hpp"
 #include "IScreenPrinting.hpp"
 #include "DialogHandler.hpp"
 #include "sound.hpp"
@@ -165,8 +166,11 @@ void gui_run(void) {
                 error_screen = ScreenFactory::Screen<screen_temperror_data_t>;
                 break;
 #ifndef _DEBUG
-            case DUMP_IWDGW:
+            case DUMP_IWDGW: 
                 error_screen = ScreenFactory::Screen<screen_watchdog_data_t>;
+                break;
+            case DUMP_USBFAULT:
+				error_screen = ScreenFactory::Screen<screen_usbfault_data_t>;
                 break;
 #endif
             }

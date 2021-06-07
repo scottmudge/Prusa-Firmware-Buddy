@@ -60,7 +60,7 @@ int dump_in_xflash_is_valid(void) {
     dumpinfo_t dumpinfo;
     w25x_rd_data(DUMP_OFFSET + DUMP_RAM_SIZE + DUMP_CCRAM_SIZE - DUMP_INFO_SIZE, (uint8_t *)(&dumpinfo), DUMP_INFO_SIZE);
     unsigned char dump_type = dumpinfo.type_flags & ~(DUMP_NOT_SAVED | DUMP_NOT_DISPL);
-    return ((dump_type == DUMP_HARDFAULT) || (dump_type == DUMP_IWDGW) || (dump_type == DUMP_TEMPERROR));
+    return (dump_type > 0x0 && dump_type <= DUMP_USBFAULT);
 }
 
 int dump_in_xflash_is_saved(void) {

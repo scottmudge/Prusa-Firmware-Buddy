@@ -49,9 +49,11 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "usbh_core.h"
+#include "usbh_conf.h"
 
 /* USER CODE BEGIN Includes */
 #include "main.h"
+#include "common/wdt.h"
 
 /* USER CODE END Includes */
 
@@ -142,12 +144,21 @@ void HAL_HCD_MspDeInit(HCD_HandleTypeDef *hcdHandle) {
 }
 
 /**
-  * @brief  SOF callback.
+  * @brief  SOF (Start-of-Frame) callback.
   * @param  hhcd: HCD handle
   * @retval None
+  * 
+  * @note   A call to refresh the WDT has been inserted here
+  *         to prevent WD timeouts when the host controller's
+  *         interrupt is triggered rapidly by some devices. It
+  *         flags a unique USB WD refresh to indicate to the WDT
+  *         if the USB device is near or at fault.
   */
 void HAL_HCD_SOF_Callback(HCD_HandleTypeDef *hhcd) {
     USBH_LL_IncTimer(hhcd->pData);
+    
+    // refresh iwdg, pre-scaled internally. pass state of HC interrupt.
+    wdt_iwdg_refresh_hcd((hhcd->Instance->GINTSTS & GINTSTS_HCHINT) ? 1 : 0);
 }
 
 /**

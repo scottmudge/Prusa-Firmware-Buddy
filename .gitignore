@@ -15,3 +15,4 @@ Makefile
 /doc/html/
 out/
 CMakeSettings.json
+desktop.ini

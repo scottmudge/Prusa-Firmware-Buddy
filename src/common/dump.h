@@ -7,9 +7,10 @@
 // dump types and flags
 static const uint8_t DUMP_UNDEFINED = 0xff; // undefined - memory erased/empty
 static const uint8_t DUMP_HARDFAULT = 0x01; // hardfault dump
-static const uint8_t DUMP_IWDGW = 0x02;     // IWDG warning dump
-static const uint8_t DUMP_GENERAL = 0x03;   // general error dump
+static const uint8_t DUMP_IWDGW     = 0x02; // IWDG warning dump
+static const uint8_t DUMP_GENERAL   = 0x03; // general error dump
 static const uint8_t DUMP_TEMPERROR = 0x04; // thermal error dump
+static const uint8_t DUMP_USBFAULT  = 0x05; // USB fault, subset of IWDG
 static const uint8_t DUMP_NOT_SAVED = 0x80; // dump not saved flag - (unsaved dump cannot be overwritten)
 static const uint8_t DUMP_NOT_DISPL = 0x40; // dump not displayed after startup
 
@@ -111,7 +112,7 @@ static const uint32_t DUMP_INFO_SIZE = 0x00000010;
 
 // fill dumpinfo
 #define DUMP_INFO_TO_CCRAM(type) \
-    *((unsigned char *)DUMP_INFO_ADDR) = type | DUMP_NOT_SAVED | DUMP_NOT_DISPL;
+    *((unsigned char *)DUMP_INFO_ADDR) = (type) | DUMP_NOT_SAVED | DUMP_NOT_DISPL;
 
 // perform hardfault dump (directly from HardFault_Handler that must be "naked")
 #define DUMP_HARDFAULT_TO_CCRAM()           \
@@ -126,7 +127,7 @@ static const uint32_t DUMP_INFO_SIZE = 0x00000010;
     {                                     \
         DUMP_REGS_GEN_IWDGW_BEGIN(depth); \
         DUMP_REGS_GEN_EXC_TO_CCRAM();     \
-        DUMP_INFO_TO_CCRAM(DUMP_IWDGW);   \
+        DUMP_INFO_TO_CCRAM(wdt_iwdg_is_usb_fault ? DUMP_USBFAULT : DUMP_IWDGW );   \
     }
 
 // perform thermal error dump

@@ -8,12 +8,19 @@ extern "C" {
 #endif //defined(__cplusplus)
 
 extern wdt_iwdg_warning_cb_t *wdt_iwdg_warning_cb; // IWDG warning callback
+extern volatile int wdt_iwdg_is_usb_fault;
 
-extern void wdt_iwdg_refresh(void); // IWDG refresh, called from C code
+// IWDG refresh, called from C code
+extern void wdt_iwdg_refresh(void); 
+
+// @brief IWDG refresh from HCD SOF callback
+// @param state of USB host-controller interrupt - 1 == active, 0 == inactive
+extern void wdt_iwdg_refresh_hcd(const int hcint_st); 
 
 extern void wdt_wwdg_init(void);
 
-extern void wdt_tick_1ms(void); // timer tick (IWDG warning), called from HAL_TIM_PeriodElapsedCallback/timer6
+// timer tick (IWDG warning), called from HAL_TIM_PeriodElapsedCallback/timer6
+extern void wdt_tick_1ms(void); 
 
 #if defined(__cplusplus)
 } //extern "C"
