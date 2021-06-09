@@ -85,18 +85,18 @@ void wdt_iwdg_init(void) {
 // a private impl without lenience refresh counter reset, used only internally
 void wdt_iwdg_refresh_impl(void) {
 #ifdef WDT_IWDG_ENABLED
-	if (hiwdg.Instance) {
-		HAL_IWDG_Refresh(&hiwdg);
-		wdt_iwdg_counter = 0;
+    if (hiwdg.Instance) {
+        HAL_IWDG_Refresh(&hiwdg);
+        wdt_iwdg_counter = 0;
 
-		// reset host-controller counters
-		if (!wdt_iwdg_is_usb_fault) {
-			wdt_iwdg_hcd_int_cnt = 0;
+        // reset host-controller counters
+        if (!wdt_iwdg_is_usb_fault) {
+            wdt_iwdg_hcd_int_cnt = 0;
 #if (USE_USB_FAILURE_LENIENCE == 1)
-			wdt_iwdg_hcd_idle_cnt = 0;
+            wdt_iwdg_hcd_idle_cnt = 0;
 #endif
-		}
-	}
+        }
+    }
 #endif //WDT_IWDG_ENABLED
 }
 
@@ -155,12 +155,12 @@ void wdt_tick_1ms(void) {
 
         // Lenience check, refresh WDT if USB HC interrupt is active, but NOT stuck
         // high. This requires both high and idle counts.
-
-        // We can't refresh the 
 #if (USE_USB_FAILURE_LENIENCE == 1)
         if (wdt_iwdg_hcd_int_cnt > WDT_IWDG_HCD_LENIENCE_LIMIT &&
             wdt_iwdg_hcd_idle_cnt > WDT_IWDG_HCD_LENIENCE_LIMIT &&
             wdt_iwdg_hcd_lenience_refresh_cnt < WDT_IWDG_HCD_LENIENCE_REFRESH_CNT) {
+            // Increment refresh counter to prevent constant refreshes w/ a seized 
+            // device.
             ++wdt_iwdg_hcd_lenience_refresh_cnt;
 
             // use private impl so refresh count is not reset here, resulting in infinite
@@ -173,8 +173,8 @@ void wdt_tick_1ms(void) {
         // check if host controller interrupt has been continuously activated
         if (wdt_iwdg_hcd_int_cnt >= WDT_IWDG_HCD_INT_LIMIT) wdt_iwdg_is_usb_fault = 1;
 
-		if (wdt_iwdg_warning_cb)
-			wdt_iwdg_warning_cb();
+        if (wdt_iwdg_warning_cb)
+            wdt_iwdg_warning_cb();
     }
 #endif //WDT_IWDG_ENABLED
 }

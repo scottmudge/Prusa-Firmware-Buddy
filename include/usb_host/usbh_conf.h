@@ -62,9 +62,9 @@ extern "C" {
   */
 
     /*
-	MiddleWare name : USB_HOST
-	MiddleWare fileName : usbh_conf.h
-	MiddleWare version :
+    MiddleWare name : USB_HOST
+    MiddleWare fileName : usbh_conf.h
+    MiddleWare version :
 */
     /*----------   -----------*/
     #define USBH_MAX_NUM_ENDPOINTS 2
@@ -100,42 +100,42 @@ extern "C" {
     #define HOST_FS 1
 
 
-	// Below are details and bit masks for USB Core Interrupt
+    // Below are details and bit masks for USB Core Interrupt
     #define BIT(nr)                 (1UL << (nr))
 
-    #define GINTSTS_WKUPINT			BIT(31)
-    #define GINTSTS_SESSREQINT		BIT(30)
-    #define GINTSTS_DISCONNINT		BIT(29)
-    #define GINTSTS_CONIDSTSCHNG	BIT(28)
-    #define GINTSTS_LPMTRANRCVD		BIT(27)
-    #define GINTSTS_PTXFEMP			BIT(26)
-    #define GINTSTS_HCHINT			BIT(25) // Host controller
-    #define GINTSTS_PRTINT			BIT(24)
-    #define GINTSTS_RESETDET		BIT(23)
-    #define GINTSTS_FET_SUSP		BIT(22)
-    #define GINTSTS_INCOMPL_IP		BIT(21)
-    #define GINTSTS_INCOMPL_SOOUT	BIT(21)
-    #define GINTSTS_INCOMPL_SOIN	BIT(20)
-    #define GINTSTS_OEPINT			BIT(19)
-    #define GINTSTS_IEPINT			BIT(18)
-    #define GINTSTS_EPMIS			BIT(17)
-    #define GINTSTS_RESTOREDONE		BIT(16)
-    #define GINTSTS_EOPF			BIT(15)
-    #define GINTSTS_ISOUTDROP		BIT(14)
-    #define GINTSTS_ENUMDONE		BIT(13)
-    #define GINTSTS_USBRST			BIT(12)
-    #define GINTSTS_USBSUSP			BIT(11)
-    #define GINTSTS_ERLYSUSP		BIT(10)
-    #define GINTSTS_I2CINT			BIT(9)
-    #define GINTSTS_ULPI_CK_INT		BIT(8)
-    #define GINTSTS_GOUTNAKEFF		BIT(7)
-    #define GINTSTS_GINNAKEFF		BIT(6)
-    #define GINTSTS_NPTXFEMP		BIT(5)
-    #define GINTSTS_RXFLVL			BIT(4)
-    #define GINTSTS_SOF			    BIT(3)
-    #define GINTSTS_OTGINT			BIT(2)
-    #define GINTSTS_MODEMIS			BIT(1)
-    #define GINTSTS_CURMODE_HOST	BIT(0)
+    #define GINTSTS_WKUPINT         BIT(31)
+    #define GINTSTS_SESSREQINT      BIT(30)
+    #define GINTSTS_DISCONNINT      BIT(29)
+    #define GINTSTS_CONIDSTSCHNG    BIT(28)
+    #define GINTSTS_LPMTRANRCVD     BIT(27)
+    #define GINTSTS_PTXFEMP         BIT(26)
+    #define GINTSTS_HCHINT          BIT(25) // Host controller
+    #define GINTSTS_PRTINT          BIT(24)
+    #define GINTSTS_RESETDET        BIT(23)
+    #define GINTSTS_FET_SUSP        BIT(22)
+    #define GINTSTS_INCOMPL_IP      BIT(21)
+    #define GINTSTS_INCOMPL_SOOUT   BIT(21)
+    #define GINTSTS_INCOMPL_SOIN    BIT(20)
+    #define GINTSTS_OEPINT          BIT(19)
+    #define GINTSTS_IEPINT          BIT(18)
+    #define GINTSTS_EPMIS           BIT(17)
+    #define GINTSTS_RESTOREDONE     BIT(16)
+    #define GINTSTS_EOPF            BIT(15)
+    #define GINTSTS_ISOUTDROP       BIT(14)
+    #define GINTSTS_ENUMDONE        BIT(13)
+    #define GINTSTS_USBRST          BIT(12)
+    #define GINTSTS_USBSUSP         BIT(11)
+    #define GINTSTS_ERLYSUSP        BIT(10)
+    #define GINTSTS_I2CINT          BIT(9)
+    #define GINTSTS_ULPI_CK_INT     BIT(8)
+    #define GINTSTS_GOUTNAKEFF      BIT(7)
+    #define GINTSTS_GINNAKEFF       BIT(6)
+    #define GINTSTS_NPTXFEMP        BIT(5)
+    #define GINTSTS_RXFLVL          BIT(4)
+    #define GINTSTS_SOF             BIT(3)
+    #define GINTSTS_OTGINT          BIT(2)
+    #define GINTSTS_MODEMIS         BIT(1)
+    #define GINTSTS_CURMODE_HOST    BIT(0)
 
 
     #if (USBH_USE_OS == 1)

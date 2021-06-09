@@ -170,7 +170,7 @@ void gui_run(void) {
                 error_screen = ScreenFactory::Screen<screen_watchdog_data_t>;
                 break;
             case DUMP_USBFAULT:
-				error_screen = ScreenFactory::Screen<screen_usbfault_data_t>;
+                error_screen = ScreenFactory::Screen<screen_usbfault_data_t>;
                 break;
 #endif
             }
