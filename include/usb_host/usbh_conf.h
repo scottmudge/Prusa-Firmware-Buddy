@@ -37,6 +37,11 @@ extern "C" {
 
     /* USER CODE END INCLUDE */
 
+    // Utility
+    #ifndef BIT
+    #define BIT(nr)                 (1UL << (nr))
+    #endif
+
     /** @addtogroup USBH_OTG_DRIVER
   * @brief Driver for Usb host.
   * @{
@@ -99,42 +104,76 @@ extern "C" {
     #define HOST_HS 0
     #define HOST_FS 1
 
+    /****************************************/
+    // Below are details and bit masks for USB Core Interrupts, 0 inactive, 1 active
 
-    // Below are details and bit masks for USB Core Interrupt
-    #define BIT(nr)                 (1UL << (nr))
-
+    // (Mode) - Desc.
+    // -------------------------------------------------------------
+    // (Host/Device) Resume/wakeup event detected (LPM state change)
     #define GINTSTS_WKUPINT         BIT(31)
+    // (Host/Device) Session request/new session interrupt
     #define GINTSTS_SESSREQINT      BIT(30)
+    // (Host Only) Disconnect event detected
     #define GINTSTS_DISCONNINT      BIT(29)
+    // (Host/Device) Change in connector ID
     #define GINTSTS_CONIDSTSCHNG    BIT(28)
+    // Unsure, might be ACK from device when it receives LPM request
     #define GINTSTS_LPMTRANRCVD     BIT(27)
+    // (Host Only) Periodic TxFIFO empty, asserted when periodic tx FIFO is half or completely empty
     #define GINTSTS_PTXFEMP         BIT(26)
-    #define GINTSTS_HCHINT          BIT(25) // Host controller
+    // (Host Only) Core sets bit indicating an interrupt is pending on a Host Channel (HCH)
+    #define GINTSTS_HCHINT          BIT(25) 
+    // (Host Only) Host port interrupt, indicates change in port status.
     #define GINTSTS_PRTINT          BIT(24)
+    // (Device Only) Reset detected on device, unused by host.
     #define GINTSTS_RESETDET        BIT(23)
+    // (Device Only) Data Fetch Suspended, only valid in DMA mode.
     #define GINTSTS_FET_SUSP        BIT(22)
+    // (Host/Device) Incomplete periodic transfer
     #define GINTSTS_INCOMPL_IP      BIT(21)
+    // Same as above
     #define GINTSTS_INCOMPL_SOOUT   BIT(21)
+    // (Device Only) Incomplete Isoch. IN Transfer
     #define GINTSTS_INCOMPL_SOIN    BIT(20)
+    // (Device Only) Out Endpoints Interrupt, indicating EP from Host (OUT) has pending interrupt
     #define GINTSTS_OEPINT          BIT(19)
+    // (Device Only) IN Endpoint Interrupt, indicating EP to Host (IN) has pending interrupt
     #define GINTSTS_IEPINT          BIT(18)
+    // (Device Only) Endpoint Mismatch Interrupt
     #define GINTSTS_EPMIS           BIT(17)
+    // Unknown
     #define GINTSTS_RESTOREDONE     BIT(16)
+    // (Device Only) End of Periodic Frame interrupt
     #define GINTSTS_EOPF            BIT(15)
+    // (Device Only) Isochr. out packet dropped interrupt
     #define GINTSTS_ISOUTDROP       BIT(14)
+    // (Device Only) Enuemeration Done interrupt
     #define GINTSTS_ENUMDONE        BIT(13)
+    // (Device Only) USB reset interrupt
     #define GINTSTS_USBRST          BIT(12)
+    // (Device Only) USB suspend interrupt
     #define GINTSTS_USBSUSP         BIT(11)
+    // (Device Only) Early suspend interrupt
     #define GINTSTS_ERLYSUSP        BIT(10)
+    // Prsumably I2C interrupt
     #define GINTSTS_I2CINT          BIT(9)
+    // Unknown
     #define GINTSTS_ULPI_CK_INT     BIT(8)
+    // (Device Only) Global OUT NAK Effective
     #define GINTSTS_GOUTNAKEFF      BIT(7)
+    // (Device Only) Global IN Non-periodic NAK Effective
     #define GINTSTS_GINNAKEFF       BIT(6)
-    #define GINTSTS_NPTXFEMP        BIT(5)
+    // (Host/Device) Non-periodic TxFIFO Empty
+    #define GINTSTS_NPTXFEMP        BIT(5
+    // (Host/Device) RxFIFO Non-Empty
     #define GINTSTS_RXFLVL          BIT(4)
+    // (Host/Device) Start of (micro)Frame
     #define GINTSTS_SOF             BIT(3)
+    // (Host/Device) OTG Interrupt, set on OTG protocl events.
     #define GINTSTS_OTGINT          BIT(2)
+    // (Host/Device) Mode Mismatch interrupt (when host mode register is in device mode, visa versa)
     #define GINTSTS_MODEMIS         BIT(1)
+    // (Host/Device) Current mode of operation, 0 = device, 1 = host
     #define GINTSTS_CURMODE_HOST    BIT(0)
 
 
