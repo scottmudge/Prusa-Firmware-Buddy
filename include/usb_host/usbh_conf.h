@@ -164,7 +164,7 @@ extern "C" {
     // (Device Only) Global IN Non-periodic NAK Effective
     #define GINTSTS_GINNAKEFF       BIT(6)
     // (Host/Device) Non-periodic TxFIFO Empty
-    #define GINTSTS_NPTXFEMP        BIT(5
+    #define GINTSTS_NPTXFEMP        BIT(5)
     // (Host/Device) RxFIFO Non-Empty
     #define GINTSTS_RXFLVL          BIT(4)
     // (Host/Device) Start of (micro)Frame
